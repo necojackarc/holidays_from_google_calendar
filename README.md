@@ -81,7 +81,11 @@ usa_holidays.holiday?(Date.parse("Aug 2 2016")) # Weekday (Tuesday)
 ```
 
 ## Development
+Need to set the following environment variable to run rspec.
 
+```bash
+GOOGLE_API_KEY="YOUR OWN GOOGLE API KEY"
+```
 
 ## Contributing
 Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/holidays_from_google_calendar. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](contributor-covenant.org) code of conduct.
