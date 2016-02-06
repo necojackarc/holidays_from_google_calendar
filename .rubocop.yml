@@ -1,0 +1,54 @@
+AllCops:
+  Include:
+    - '**/Rakefile'
+  Exclude:
+    - 'bin/*'
+    - 'Gemfile'
+
+# Accept single-line methods with no body
+SingleLineMethods:
+  AllowIfMethodIsEmpty: true
+
+# Top-level documentation of classes and modules are needless
+Documentation:
+  Enabled: false
+
+# Allow to chain of block after another block that spans multiple lines
+MultilineBlockChain:
+  Enabled: false
+
+# Allow `->` literal for multi line blocks
+Lambda:
+  Enabled: false
+
+# Both nested and compact are okay
+ClassAndModuleChildren:
+  Enabled: false
+
+# Specifying param names is unnecessary
+Style/SingleLineBlockParams:
+  Enabled: false
+
+# Prefer Kernel#sprintf
+FormatString:
+  EnforcedStyle: sprintf
+
+# Maximum line length
+LineLength:
+  Max: 100
+
+# Whatever we should use "postfix if/unless"
+IfUnlessModifier:
+  MaxLineLength: 100
+
+# Maximum method length
+MethodLength:
+  Max: 20
+
+# Tuned to MethodLength
+Metrics/AbcSize:
+  Max: 30
+
+# Prefer double_quotes strings unless your string literal contains escape chars
+StringLiterals:
+  EnforcedStyle: double_quotes
