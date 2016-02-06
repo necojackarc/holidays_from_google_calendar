@@ -5,6 +5,9 @@ module HolidaysFromGoogleCalendar
       @language = configuration.calendar[:language]
       @api_key = configuration.credential[:api_key]
       @cache = Cache.new(configuration.cache)
+
+      return unless configuration.preload[:enable]
+      preload(configuration.preload[:date_range])
     end
 
     def retrieve(date_min: nil, date_max: nil)
@@ -50,6 +53,13 @@ module HolidaysFromGoogleCalendar
         )
         array.push(holiday)
       end
+    end
+
+    def preload(date_range)
+      retrieve(
+        date_min: Date.current - date_range,
+        date_max: Date.current + date_range
+      )
     end
   end
 end

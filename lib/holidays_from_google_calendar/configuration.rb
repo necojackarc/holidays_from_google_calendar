@@ -1,12 +1,8 @@
 module HolidaysFromGoogleCalendar
   class Configuration
-    CALENDAR_ATTRIBUTES = %i(nation language).freeze
-    CREDENTIAL_ATTRIBUTES = %i(api_key).freeze
-    CACHE_ATTRIBUTES = %i(enable size).freeze
-
     DEFAULT_CACHE_SIZE = 1_000
 
-    attr_accessor :calendar, :credential, :cache
+    attr_accessor :calendar, :credential, :cache, :preload
 
     def initialize
       @calendar = {
@@ -17,6 +13,11 @@ module HolidaysFromGoogleCalendar
       @cache = {
         enable: true,
         max_size: DEFAULT_CACHE_SIZE
+      }
+
+      @preload = {
+        enable: true, # Require cache enabled
+        date_range: 1.year
       }
     end
   end
