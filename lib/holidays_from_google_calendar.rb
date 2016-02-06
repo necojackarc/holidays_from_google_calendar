@@ -17,13 +17,6 @@ module HolidaysFromGoogleCalendar
       @client = Client.new(@configuration)
     end
 
-    def on_date(date)
-      @client.retrieve(
-        date_min: date,
-        date_max: date
-      )
-    end
-
     def in_year(date)
       @client.retrieve(
         date_min: date.beginning_of_year,
