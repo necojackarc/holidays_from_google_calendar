@@ -1,9 +1,12 @@
 module HolidaysFromGoogleCalendar
   class Cache
-    def initialize(enable: nil, size: nil)
+    attr_reader :size
+
+    def initialize(enable: nil, max_size: nil)
       @enable = enable
-      @size = size
+      @max_size = max_size
       @container = []
+      calculate_size
     end
 
     def enabled?
@@ -11,18 +14,34 @@ module HolidaysFromGoogleCalendar
     end
 
     def cache(holidays, date_min, date_max)
-      pack_container(CacheUnit.new(holidays, date_min, date_max))
+      pack_container(CacheUnit.new(holidays.dup, date_min, date_max))
+      page_out if calculate_size > @max_size
     end
 
     def retrieve(date_min, date_max)
-      @container.each do |unit|
-        next unless unit.include?(date_min, date_max)
-        return unit.retrieve(date_min, date_max)
-      end
-      nil # Haven't hit any cache
+      unit = @container.find { |e| e.include?(date_min, date_max) }
+      return nil if unit.nil?
+
+      # For LRU (Least Recently Used)
+      @container.delete(unit)
+      @container.push(unit)
+
+      unit.retrieve(date_min, date_max)
     end
 
     private
+
+    def calculate_size
+      @size = unit_count + holidays_count
+    end
+
+    def unit_count
+      @container.size
+    end
+
+    def holidays_count
+      @container.map(&:size).sum
+    end
 
     def pack_container(new_unit)
       unnecessary_units = @container.reduce([]) do |array, unit|
@@ -38,6 +57,15 @@ module HolidaysFromGoogleCalendar
       end
       @container -= unnecessary_units
       @container.push(new_unit)
+    end
+
+    def page_out
+      deleted_size = 0
+      while (@size - deleted_size) > @max_size
+        unit = @container.shift
+        deleted_size += (1 + unit.size) # Size is unit count plus holiday count
+      end
+      @size -= deleted_size
     end
   end
 end

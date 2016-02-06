@@ -8,6 +8,10 @@ module HolidaysFromGoogleCalendar
       @date_max = date_max
     end
 
+    def size
+      @holidays.size
+    end
+
     def include?(date_min, date_max)
       [date_min, date_max].all? { |e| @date_min <= e && e <= @date_max }
     end

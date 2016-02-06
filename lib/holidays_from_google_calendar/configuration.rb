@@ -4,7 +4,7 @@ module HolidaysFromGoogleCalendar
     CREDENTIAL_ATTRIBUTES = %i(api_key).freeze
     CACHE_ATTRIBUTES = %i(enable size).freeze
 
-    DEFAULT_CACHE_SIZE = 100
+    DEFAULT_CACHE_SIZE = 1_000
 
     attr_accessor :calendar, :credential, :cache
 
@@ -16,7 +16,7 @@ module HolidaysFromGoogleCalendar
 
       @cache = {
         enable: true,
-        size: DEFAULT_CACHE_SIZE
+        max_size: DEFAULT_CACHE_SIZE
       }
     end
   end
