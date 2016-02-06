@@ -7,7 +7,7 @@ module HolidaysFromGoogleCalendar
     def initialize
       @calendar = {
         nation: "japanese",
-        language: "ja"
+        language: "en"
       }
 
       @cache = {

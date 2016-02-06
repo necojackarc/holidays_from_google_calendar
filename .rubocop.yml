@@ -29,6 +29,10 @@ ClassAndModuleChildren:
 Style/SingleLineBlockParams:
   Enabled: false
 
+# Allow using `{...}` for anytime
+Style/BlockDelimiters:
+  Enabled: false
+
 # Prefer Kernel#sprintf
 FormatString:
   EnforcedStyle: sprintf
