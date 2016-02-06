@@ -11,6 +11,9 @@ module HolidaysFromGoogleCalendar
     end
 
     def retrieve(date_min: nil, date_max: nil)
+      date_min = Date.parse(date_min.iso8601)
+      date_max = Date.parse(date_max.iso8601)
+
       if @cache.enabled?
         cached_holidays = @cache.retrieve(date_min, date_max)
         return cached_holidays if cached_holidays
@@ -32,9 +35,9 @@ module HolidaysFromGoogleCalendar
         single_events: true,
         order_by: "startTime",
         time_min: date_to_time(date_min),
-        time_max: date_to_time(date_max)
+        time_max: date_to_time(date_max + 1.day)
       )
-      pack_response_in_object(response)
+      pack_response_in_object(response, date_min, date_max)
     end
 
     def calendar_id
@@ -42,17 +45,21 @@ module HolidaysFromGoogleCalendar
     end
 
     def date_to_time(date)
-      date = Date.parse(date.iso8601) if date.is_a?(Time)
       Time.parse(date.iso8601).iso8601
     end
 
-    def pack_response_in_object(response)
+    def pack_response_in_object(response, date_min, date_max)
       response.items.reduce([]) do |array, item|
         holiday = Holiday.new(
           name: item.summary,
           date: Date.parse(item.start.date)
         )
-        array.push(holiday)
+
+        if date_min <= holiday.date && holiday.date <= date_max
+          array.push(holiday)
+        else
+          array # Do nothing
+        end
       end
     end
 

@@ -61,7 +61,6 @@ usa_holidays.in_year(Date.parse("2016-02-06")) # Retrieve 2016's holidays
  #<HolidaysFromGoogleCalendar::Holiday:0x007ff7d42d7a70 @date=Sun, 25 Dec 2016, @name="Christmas Day">,
  #<HolidaysFromGoogleCalendar::Holiday:0x007ff7d42d7660 @date=Mon, 26 Dec 2016, @name="Christmas Day observed">,
  #<HolidaysFromGoogleCalendar::Holiday:0x007ff7d42d70e8 @date=Sat, 31 Dec 2016, @name="New Year's Eve">,
- #<HolidaysFromGoogleCalendar::Holiday:0x007ff7d42d62b0 @date=Sun, 01 Jan 2017, @name="New Year's Day">]
 
 usa_holidays.in_month(Date.parse("3rd March 2016")) # Retrieve holidays of March, 2016
 => [#<HolidaysFromGoogleCalendar::Holiday:0x007ff7d42dd808 @date=Sun, 13 Mar 2016, @name="Daylight Saving Time starts">,
