@@ -18,7 +18,7 @@ module HolidaysFromGoogleCalendar
     def in_year(date)
       response = retrieve_from_google_calendar(
         date_min: date.beginning_of_year,
-        date_max: date.end_of_year
+        date_max: date.end_of_year + 1.day
       )
       pack_response_in_struct(response)
     end
@@ -26,9 +26,15 @@ module HolidaysFromGoogleCalendar
     def in_month(date)
       response = retrieve_from_google_calendar(
         date_min: date.beginning_of_month,
-        date_max: date.end_of_month
+        date_max: date.end_of_month + 1.day
       )
       pack_response_in_struct(response)
+    end
+
+    def holiday?(date)
+      return true if date.wday.in?([0, 6]) # If Sunday or Saturday
+      response = retrieve_from_google_calendar(date_min: date, date_max: date + 1.day)
+      response.items.size > 0
     end
 
     private
