@@ -80,7 +80,7 @@ usa_holidays.holiday?(Date.parse("Aug 2 2016")) # Weekday (Tuesday)
 ```
 
 ## Development
-Need to set the following environment variable to run rspec.
+Need to set the following environment variable to run rspec:
 
 ```bash
 GOOGLE_API_KEY="YOUR OWN GOOGLE API KEY"
