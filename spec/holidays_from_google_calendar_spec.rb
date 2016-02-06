@@ -22,7 +22,7 @@ describe HolidaysFromGoogleCalendar do
 
     describe "response format" do
       subject { holidays.in_year(date).first }
-      its(:name) { is_expected.to be_a String  }
+      its(:name) { is_expected.to be_a String }
       its(:date) { is_expected.to be_a Date }
     end
   end
@@ -32,7 +32,7 @@ describe HolidaysFromGoogleCalendar do
 
     describe "response format" do
       subject { holidays.in_month(date).first }
-      its(:name) { is_expected.to be_a String  }
+      its(:name) { is_expected.to be_a String }
       its(:date) { is_expected.to be_a Date }
     end
   end

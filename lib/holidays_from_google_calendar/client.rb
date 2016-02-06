@@ -42,6 +42,7 @@ module HolidaysFromGoogleCalendar
     end
 
     def date_to_time(date)
+      date = Date.parse(date.iso8601) if date.is_a?(Time)
       Time.parse(date.iso8601).iso8601
     end
 
