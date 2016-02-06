@@ -1,13 +1,15 @@
 module HolidaysFromGoogleCalendar
   class Configuration
-    ATTRIBUTES = %i(nation language api_key)
+    CALENDAR_ATTRIBUTES = %i(nation language).freeze
+    CREDENTIAL_ATTRIBUTES = %i(api_key).freeze
 
-    attr_accessor(*ATTRIBUTES)
+    attr_accessor :calendar, :credential
 
-    def to_h
-      ATTRIBUTES.reduce({}) do |hash, attribute|
-        hash.merge(attribute => public_send(attribute))
-      end
+    def initialize
+      @calendar = {
+        nation: "japanese",
+        language: "ja"
+      }
     end
   end
 end
