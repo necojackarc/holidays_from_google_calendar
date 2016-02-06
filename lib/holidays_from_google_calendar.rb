@@ -1,12 +1,13 @@
-require "holidays_from_google_calendar/version"
-require "holidays_from_google_calendar/configuration"
-require "holidays_from_google_calendar/client"
-require "holidays_from_google_calendar/holiday"
-
-require "google/apis/calendar_v3"
-
 require "active_support"
 require "active_support/core_ext"
+require "google/apis/calendar_v3"
+
+require "holidays_from_google_calendar/cache"
+require "holidays_from_google_calendar/cache_unit"
+require "holidays_from_google_calendar/client"
+require "holidays_from_google_calendar/configuration"
+require "holidays_from_google_calendar/holiday"
+require "holidays_from_google_calendar/version"
 
 module HolidaysFromGoogleCalendar
   class Holidays
@@ -17,14 +18,14 @@ module HolidaysFromGoogleCalendar
     end
 
     def in_year(date)
-      @client.retrieve_from_google_calendar(
+      @client.retrieve(
         date_min: date.beginning_of_year,
         date_max: date.end_of_year + 1.day
       )
     end
 
     def in_month(date)
-       @client.retrieve_from_google_calendar(
+      @client.retrieve(
         date_min: date.beginning_of_month,
         date_max: date.end_of_month + 1.day
       )
@@ -32,8 +33,7 @@ module HolidaysFromGoogleCalendar
 
     def holiday?(date)
       return true if date.wday.in?([0, 6]) # If Sunday or Saturday
-      response = @client.retrieve_from_google_calendar(date_min: date, date_max: date + 1.day)
-      response.items.size > 0
+      @client.retrieve(date_min: date, date_max: date + 1.day).size > 0
     end
   end
 end

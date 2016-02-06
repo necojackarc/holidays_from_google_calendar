@@ -4,9 +4,23 @@ module HolidaysFromGoogleCalendar
       @nation = configuration.calendar[:nation]
       @language = configuration.calendar[:language]
       @api_key = configuration.credential[:api_key]
+      @cache = Cache.new(configuration.cache)
     end
 
-    def retrieve_from_google_calendar(date_min: nil, date_max: nil)
+    def retrieve(date_min: nil, date_max: nil)
+      if @cache.enabled?
+        cached_holidays = @cache.retrieve(date_min, date_max)
+        return cached_holidays if cached_holidays
+      end
+
+      retrieve_from_google_calendar(date_min, date_max).tap do |holidays|
+        @cache.cache(holidays, date_min, date_max) if @cache.enabled?
+      end
+    end
+
+    private
+
+    def retrieve_from_google_calendar(date_min, date_max)
       service = Google::Apis::CalendarV3::CalendarService.new
       service.key = @api_key
 
@@ -19,8 +33,6 @@ module HolidaysFromGoogleCalendar
       )
       pack_response_in_object(response)
     end
-
-    private
 
     def calendar_id
       "#{@language}.#{@nation}#holiday@group.v.calendar.google.com"
