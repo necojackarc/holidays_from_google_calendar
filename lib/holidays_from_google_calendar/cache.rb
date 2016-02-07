@@ -31,6 +31,7 @@ module HolidaysFromGoogleCalendar
 
     private
 
+    # The size of cache is sum of unit count and the number of holidays
     def calculate_size
       @size = unit_count + holidays_count
     end

@@ -37,14 +37,6 @@ Style/BlockDelimiters:
 FormatString:
   EnforcedStyle: sprintf
 
-# Maximum line length
-LineLength:
-  Max: 100
-
-# Whatever we should use "postfix if/unless"
-IfUnlessModifier:
-  MaxLineLength: 100
-
 # Maximum method length
 MethodLength:
   Max: 20
