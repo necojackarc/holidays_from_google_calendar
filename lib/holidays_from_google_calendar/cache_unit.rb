@@ -21,14 +21,14 @@ module HolidaysFromGoogleCalendar
     end
 
     def overlapped?(other)
-      (date_min <= other.date_max && other.date_min <= date_max + 1) ||
-        (other.date_min <= date_max && date_min <= other.date_max + 1)
+      (date_min <= other.date_max && other.date_min <= date_max + 1.day) ||
+        (other.date_min <= date_max && date_min <= other.date_max + 1.day)
     end
 
     def combine(other)
       return unless overlapped?(other)
-      date_min = [date_min, other.date_min].min
-      date_max = [date_max, other.date_max].max
+      @date_min = [@date_min, other.date_min].min
+      @date_max = [@date_max, other.date_max].max
       @holidays =
         @holidays.concat(other.holidays).uniq.sort { |a, b| a.date <=> b.date }
     end
