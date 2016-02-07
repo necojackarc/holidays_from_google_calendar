@@ -17,7 +17,7 @@ describe HolidaysFromGoogleCalendar::Cache do
 
   subject { cache.size }
 
-  it { is_expected.to eq 1 } # Because of holidays is nothing
+  it { is_expected.to eq 1 } # Because `holidays` is empty
 
   describe "Unite units" do
     let(:new_holidays) { [] }
