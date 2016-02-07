@@ -21,8 +21,8 @@ module HolidaysFromGoogleCalendar
     end
 
     def overlapped?(other)
-      (date_min <= other.date_max && other.date_min <= date_max + 1.day) ||
-        (other.date_min <= date_max && date_min <= other.date_max + 1.day)
+      (@date_min <= other.date_max && other.date_min <= @date_max + 1.day) ||
+        (other.date_min <= @date_max && @date_min <= other.date_max + 1.day)
     end
 
     def combine(other)
