@@ -1,5 +1,25 @@
 # HolidaysFromGoogleCalendar [![Build Status](https://travis-ci.org/necojackarc/holidays_from_google_calendar.svg?branch=master)](https://travis-ci.org/necojackarc/holidays_from_google_calendar) [![Code Climate](https://codeclimate.com/github/necojackarc/holidays_from_google_calendar/badges/gpa.svg)](https://codeclimate.com/github/necojackarc/holidays_from_google_calendar) [![Test Coverage](https://codeclimate.com/github/necojackarc/holidays_from_google_calendar/badges/coverage.svg)](https://codeclimate.com/github/necojackarc/holidays_from_google_calendar/coverage)
-Under construction.
+HolidaysFromGoogleCalendar can retrieve national holidays from Google Calendar with very simple interface.
+
+The results is going to be cached and you can preload holidays with your favorite range at initialization if you want.
+These features help you to reduce access times to Google Calendar API.
+
+I am sure that you only need to access the API a very few times if you preload holidays with proper range.
+
+Using Google Calendar, available nations are same as Google Calendar.
+
+Note that you can only retrieve holidays which Google Calendar has.
+Google Calendar appears not to have all holidays, so you cannot retrieve very old ones and far future's.
+
+## Features
+### Main
+* List holidays of a particular nation in a particular year
+* List holidays of a particular nation in a particular month
+* Check a date whether it is a holiday or not in a particular nation
+
+### Others
+* Cacheing results using LRU algorithm
+* Preload holidays at initialization
 
 ## Installation
 Add this line to your application's Gemfile:
@@ -21,7 +41,54 @@ $ gem install holidays_from_google_calendar
 ```
 
 ## Usage
+### Configuration
+All parameters you can pass are below:
 
+```ruby
+usa_holidays = HolidaysFromGoogleCalendar::Holidays.new do |config|
+  config.credential = {
+    api_key: "YOUR OWN GOOGLE API KEY"
+  }
+
+  config.calendar = {
+    nation: "usa",
+    language: "en"
+  }
+
+  config.cache = {
+    enable: true,
+    max_size: 1000 # DEFAULT_CACHE_SIZE is 1000
+  }
+
+  config.preload = {
+    enable: true, # Require cache enabled
+    date_range: 1.year # Retrive holidays from "this day last year" to "this day next year"
+  }
+end
+```
+
+Default parameters of `cache` and `preload` are same as above.
+
+### List holidays of a particular nation in a particular year
+Returns a array of holidays in a particular year.
+
+```ruby
+usa_holidays.in_year(Date.current)
+```
+
+### List holidays of a particular nation in a particular month
+Returns a array of holidays in a particular month.
+
+```ruby
+usa_holidays.in_month(Date.current)
+```
+
+### Check a date whether it is a holiday or not in a particular nation
+Returns `true` when the day is holiday, Saturday or Sunday.
+
+```ruby
+usa_holidays.holiday?(Date.current)
+```
 
 ### Sample code
 ```ruby
@@ -69,7 +136,7 @@ usa_holidays.in_month(Date.parse("3rd March 2016")) # Retrieve holidays of March
 usa_holidays.holiday?(Date.parse("Oct 31 2016")) # Halloween
 => true
 
-usa_holidays.holiday?(Date.parse("April 16th 2016")) # Satruday
+usa_holidays.holiday?(Date.parse("April 16th 2016")) # Saturday
 => true
 
 usa_holidays.holiday?(Date.parse("April 17th 2016")) # Sunday
