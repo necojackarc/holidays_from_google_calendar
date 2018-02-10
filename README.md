@@ -1,4 +1,9 @@
-# HolidaysFromGoogleCalendar [![Build Status](https://travis-ci.org/necojackarc/holidays_from_google_calendar.svg?branch=master)](https://travis-ci.org/necojackarc/holidays_from_google_calendar) [![Code Climate](https://codeclimate.com/github/necojackarc/holidays_from_google_calendar/badges/gpa.svg)](https://codeclimate.com/github/necojackarc/holidays_from_google_calendar) [![Test Coverage](https://codeclimate.com/github/necojackarc/holidays_from_google_calendar/badges/coverage.svg)](https://codeclimate.com/github/necojackarc/holidays_from_google_calendar/coverage)
+# HolidaysFromGoogleCalendar 
+
+[![Build Status](https://travis-ci.org/necojackarc/holidays_from_google_calendar.svg?branch=master)](https://travis-ci.org/necojackarc/holidays_from_google_calendar)
+[![Code Climate](https://codeclimate.com/github/necojackarc/holidays_from_google_calendar/badges/gpa.svg)](https://codeclimate.com/github/necojackarc/holidays_from_google_calendar)
+[![Test Coverage](https://codeclimate.com/github/necojackarc/holidays_from_google_calendar/badges/coverage.svg)](https://codeclimate.com/github/necojackarc/holidays_from_google_calendar/coverage)
+
 HolidaysFromGoogleCalendar can retrieve national holidays from Google Calendar with very simple interface.
 
 The results is going to be cached and you can preload holidays with your favorite range at initialization if you want.
