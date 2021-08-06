@@ -50,9 +50,11 @@ module HolidaysFromGoogleCalendar
 
     def pack_response_in_object(response, date_min, date_max)
       response.items.reduce([]) do |array, item|
+        date = item.start.date
+
         holiday = Holiday.new(
           name: item.summary,
-          date: Date.parse(item.start.date)
+          date: date.is_a?(Date) ? date : Date.parse(date)
         )
 
         if date_min <= holiday.date && holiday.date <= date_max
