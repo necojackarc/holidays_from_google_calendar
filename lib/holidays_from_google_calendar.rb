@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "active_support"
 require "active_support/core_ext"
 require "google/apis/calendar_v3"
@@ -33,6 +35,7 @@ module HolidaysFromGoogleCalendar
 
     def holiday?(date)
       return true if date.wday.in?([0, 6]) # If Sunday or Saturday
+
       @client.retrieve(date_min: date, date_max: date).size > 0
     end
   end

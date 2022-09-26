@@ -19,12 +19,12 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
-  spec.add_dependency "google-api-client", "~> 0.9"
   spec.add_dependency "activesupport"
+  spec.add_dependency "google-apis-calendar_v3"
 
-  spec.add_development_dependency "bundler", "~> 1.10"
-  spec.add_development_dependency "rake", "~> 10.0"
+  spec.add_development_dependency "bundler", "~> 2.1.4"
   spec.add_development_dependency "pry"
+  spec.add_development_dependency "rake", "~> 10.0"
   spec.add_development_dependency "rspec"
   spec.add_development_dependency "rspec-its"
   spec.add_development_dependency "simplecov"

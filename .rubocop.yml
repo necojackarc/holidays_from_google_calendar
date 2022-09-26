@@ -4,6 +4,7 @@ AllCops:
   Exclude:
     - 'bin/*'
     - 'Gemfile'
+  NewCops: enable
 
 # Accept single-line methods with no body
 SingleLineMethods:
