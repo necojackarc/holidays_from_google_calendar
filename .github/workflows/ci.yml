@@ -37,3 +37,8 @@ jobs:
       run: bundle exec rake
       env:
         GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+
+    - name: Send test coverage report to Coveralls
+      uses: coverallsapp/github-action@master
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
