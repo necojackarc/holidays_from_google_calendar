@@ -22,10 +22,11 @@ Gem::Specification.new do |spec|
   spec.add_dependency "activesupport"
   spec.add_dependency "google-apis-calendar_v3"
 
-  spec.add_development_dependency "bundler", "~> 2.1.4"
+  spec.add_development_dependency "bundler"
   spec.add_development_dependency "pry"
-  spec.add_development_dependency "rake", "~> 10.0"
+  spec.add_development_dependency "rake"
   spec.add_development_dependency "rspec"
   spec.add_development_dependency "rspec-its"
   spec.add_development_dependency "simplecov"
+  spec.add_development_dependency "simplecov-lcov"
 end
