@@ -4,7 +4,7 @@ module HolidaysFromGoogleCalendar
       @nation = configuration.calendar[:nation]
       @language = configuration.calendar[:language]
       @api_key = configuration.credential[:api_key]
-      @cache = Cache.new(configuration.cache)
+      @cache = Cache.new(**configuration.cache)
 
       return unless configuration.preload[:enable]
       preload(configuration.preload[:date_range])
