@@ -1,3 +1,3 @@
 module HolidaysFromGoogleCalendar
-  VERSION = "0.4.7"
+  VERSION = "1.0.0"
 end
