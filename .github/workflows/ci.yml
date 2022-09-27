@@ -3,20 +3,25 @@ name: CI
 on:
   workflow_dispatch:
   push:
-    branches: [ "master" ]
+    branches:
+      - master
   pull_request:
-    branches: [ "master" ]
+    branches:
+      - master
 
 permissions:
   contents: read
 
 jobs:
   test:
-
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        ruby-version: ['2.6', '2.7', '3.0']
+        ruby-version:
+          - '2.6'
+          - '2.7'
+          - '3.0'
+          - '3.1'
 
     steps:
     - name: Checkout
